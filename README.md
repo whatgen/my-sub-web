@@ -1,4 +1,4 @@
-# my-sub-web 又一个订阅转换前端
+# my-sub-web 又一个订阅转换前端 （修改--添加一个自己想要的功能））
 
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fmy-sub-web.vercel.app&style=flat-square&label=DEMO) ![Vercel](https://vercelbadge.vercel.app/api/DyAxy/my-sub-web?style=flat-square) ![GitHub License](https://img.shields.io/github/license/DyAxy/my-sub-web?style=flat-square)
 
@@ -10,18 +10,68 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDyAxy%2Fmy-sub-web&env=NEXT_PUBLIC_SHORTURL,NEXT_PUBLIC_BACKENDS&envDescription=%E5%A6%82%E6%9E%9C%E4%B8%8D%E4%BC%9A%E5%A1%AB%E7%82%B9%E5%8F%B3%E8%BE%B9%20%20Learn%20More&envLink=https%3A%2F%2Fgithub.com%2FDyAxy%2Fmy-sub-web%2Fblob%2Fmaster%2F.env&project-name=my-sub-web&repository-name=my-sub-web)
 
-### 本地使用 Docker
-- Docker run方式部署
-```
-docker run -d -p 127.0.0.1:3000:3000 --name my-sub-web --restart=always moefaq/my-sub-web:latest -e NEXT_PUBLIC_SHORTURL=https://suo.yt/ -e NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub?
-# 替换后端或短链接服务
+### 使用 Docker 部署
+
+#### 方式一：Docker Run
+
+使用 Docker Hub 上的镜像快速启动：
+
+```bash
+docker run -d \
+  -p 3000:3000 \
+  --name my-sub-web \
+  --restart=always \
+  -e NEXT_PUBLIC_SHORTURL=https://suo.yt/ \
+  -e NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub? \
+  -v ./subscriptions:/app/subscriptions \
+  whatgen/my-sub-web:latest
 ```
 
-- Docker compose方式部署
+参数说明：
+- `-p 3000:3000`：映射端口，可改为 `-p 127.0.0.1:3000:3000` 仅本地访问
+- `-e NEXT_PUBLIC_SHORTURL`：短链接服务地址
+- `-e NEXT_PUBLIC_BACKENDS`：后端服务地址，多个后端用 `|` 分隔
+- `-v ./subscriptions:/app/subscriptions`：挂载订阅文件目录（用于文本模式）
+- `--restart=always`：容器自动重启
+
+#### 方式二：Docker Compose（推荐）
+
+1. 下载 docker-compose.yml 文件：
+```bash
+curl -LO https://raw.githubusercontent.com/whatgen/my-sub-web/master/docker-compose.yml
 ```
-curl -LO https://raw.githubusercontent.com/DyAxy/my-sub-web/master/docker-compose.yml
-# 你可以修改 docker-compose.yml 中的 env
+
+2. 编辑 `docker-compose.yml` 修改环境变量（可选）
+
+3. 启动服务：
+```bash
 docker compose up -d
+```
+
+4. 查看日志：
+```bash
+docker compose logs -f
+```
+
+5. 停止服务：
+```bash
+docker compose down
+```
+
+#### 方式三：本地构建镜像
+
+如果你想自己构建镜像：
+
+```bash
+# 克隆仓库
+git clone https://github.com/whatgen/my-sub-web.git
+cd my-sub-web
+
+# 构建镜像
+docker build -t my-sub-web:local .
+
+# 运行容器
+docker run -d -p 3000:3000 --name my-sub-web my-sub-web:local
 ```
 
 ### 环境变量

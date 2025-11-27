@@ -1,8 +1,8 @@
-name: yet-another-sub-web
+name: my-sub-web
 
 services:
   web:
-    image: moefaq/yet-another-sub-web
+    image: whatgen/my-sub-web:latest
     restart: always
     environment:
       TZ: Asia/Shanghai
