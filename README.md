@@ -31,6 +31,7 @@ docker run -d \
 - `-p 3000:3000`：映射端口，可改为 `-p 127.0.0.1:3000:3000` 仅本地访问
 - `-e NEXT_PUBLIC_SHORTURL`：短链接服务地址
 - `-e NEXT_PUBLIC_BACKENDS`：后端服务地址，多个后端用 `|` 分隔
+- `两个方案`：选项 1：使用 Docker 部署后端（推荐tindy2013/subconverter），选项 2：使用公共后端
 - `-v ./subscriptions:/app/subscriptions`：挂载订阅文件目录（用于文本模式）
 - `--restart=always`：容器自动重启
 
