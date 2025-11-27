@@ -19,8 +19,28 @@ interface RemoteCategory {
     category: string
     items: RemoteConfigURL[]
 }
+interface SavedSubscription {
+    id: string;
+    title: string;
+    content: string;
+    subLink?: string;
+    shortSubLink?: string;
+    hasPassword: boolean;
+    passwordHash?: string;
+    createdAt: number;
+    updatedAt: number;
+}
+
+interface TextModeParams {
+    title: string;
+    content: string;
+    hasPassword: boolean;
+    password: string;
+    selectedId: string | null;
+}
+
 interface Params {
-    mode: 'easy' | 'hard';
+    mode: 'easy' | 'hard' | 'text';
     subLink: string;
     shortSubLink: string;
     shortSubLoading: boolean;

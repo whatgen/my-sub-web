@@ -1,7 +1,7 @@
 name: yet-another-sub-web
 
 services:
-  bot:
+  web:
     image: moefaq/yet-another-sub-web
     restart: always
     environment:
@@ -10,6 +10,8 @@ services:
       NEXT_PUBLIC_BACKENDS: http://127.0.0.1:25500/sub?
     ports:
       - "127.0.0.1:3000:3000"
+    volumes:
+      - ./subscriptions:/app/subscriptions
     networks:
       - network
 
