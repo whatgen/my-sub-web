@@ -702,7 +702,7 @@ export default function Home() {
           <ModalHeader className="flex flex-col gap-1">确认删除</ModalHeader>
           <ModalBody>
             <p>
-              确定要删除订阅 <strong>"{deleteTargetId ? getSubscriptionById(deleteTargetId)?.title : ''}"</strong> 吗？
+              确定要删除订阅 <strong>&quot;{deleteTargetId ? getSubscriptionById(deleteTargetId)?.title : ''}&quot;</strong> 吗？
             </p>
             <p className="text-sm text-default-500">此操作无法撤销。</p>
           </ModalBody>
