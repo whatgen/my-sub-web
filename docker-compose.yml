@@ -1,19 +1,19 @@
-name: my-sub-web
-
 services:
   web:
     image: whatgen/my-sub-web:latest
+    container_name: my-sub-web
     restart: always
     environment:
-      TZ: Asia/Shanghai
-      NEXT_PUBLIC_SHORTURL: https://suo.yt/
-      NEXT_PUBLIC_BACKENDS: http://127.0.0.1:25500/sub?
+      - TZ=Asia/Shanghai
+      - NEXT_PUBLIC_SHORTURL=https://suo.yt/
+      - NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub?
     ports:
-      - "127.0.0.1:3000:3000"
+      - "8011:3000"
     volumes:
-      - ./subscriptions:/app/subscriptions
+      - ./subscriptions:/app/subscriptions # 订阅文件持久化
     networks:
       - network
 
 networks:
   network:
+    driver: bridge

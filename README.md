@@ -18,9 +18,10 @@
 
 ```bash
 docker run -d \
-  -p 3000:3000 \
+  -p 8011:3000 \
   --name my-sub-web \
   --restart=always \
+  -e TZ=Asia/Shanghai \
   -e NEXT_PUBLIC_SHORTURL=https://suo.yt/ \
   -e NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub? \
   -v ./subscriptions:/app/subscriptions \
@@ -28,7 +29,8 @@ docker run -d \
 ```
 
 参数说明：
-- `-p 3000:3000`：映射端口，可改为 `-p 127.0.0.1:3000:3000` 仅本地访问
+- `-p 8011:3000`：映射端口，可改为 `-p 127.0.0.1:8011:3000` 仅本地访问
+- `-e TZ=Asia/Shanghai`：设置时区
 - `-e NEXT_PUBLIC_SHORTURL`：短链接服务地址
 - `-e NEXT_PUBLIC_BACKENDS`：后端服务地址，多个后端用 `|` 分隔
 - `两个方案`：选项 1：使用 Docker 部署后端（推荐tindy2013/subconverter），选项 2：使用公共后端
