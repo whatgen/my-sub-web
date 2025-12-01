@@ -6,6 +6,10 @@
 
 ## 快速部署
 
+保存到本地指令：docker save whatgen/my-sub-web:latest -o my-sub-web.tar
+上传到dockerhub的方法：docker push whatgen/my-sub-web:latest
+然后更新版本的指令：docker tag whatgen/my-sub-web:latest whatgen/my-sub-web:v1.0.3 ; docker push whatgen/my-sub-web:v1.0.3
+
 ### 使用 Vercel 服务
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDyAxy%2Fmy-sub-web&env=NEXT_PUBLIC_SHORTURL,NEXT_PUBLIC_BACKENDS&envDescription=%E5%A6%82%E6%9E%9C%E4%B8%8D%E4%BC%9A%E5%A1%AB%E7%82%B9%E5%8F%B3%E8%BE%B9%20%20Learn%20More&envLink=https%3A%2F%2Fgithub.com%2FDyAxy%2Fmy-sub-web%2Fblob%2Fmaster%2F.env&project-name=my-sub-web&repository-name=my-sub-web)
@@ -24,8 +28,12 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   -e NEXT_PUBLIC_SHORTURL=https://suo.yt/ \
   -e NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub? \
+  -e BASE_URL=https://your-domain.com:21180 \
   -v ./subscriptions:/app/subscriptions \
   whatgen/my-sub-web:latest
+
+# 如果需要指定订阅链接的文本模式的 URL（可选）：
+# -e BASE_URL=https://your-domain.com \
 ```
 
 参数说明：
@@ -78,10 +86,11 @@ docker run -d -p 3000:3000 --name my-sub-web my-sub-web:local
 ```
 
 ### 环境变量
-| NEXT_PUBLIC_SHORTURL | NEXT_PUBLIC_BACKENDS        |
-| -------------------- | --------------------------- |
-| 短链接服务，记得带 /   | 后端完整地址                 |
-| https://suo.yt/      | http://127.0.0.1:25500/sub? |
+| 变量名 | 说明 | 示例 | 必填 |
+| -------------------- | --------------------------- | --------------------------- | ---- |
+| NEXT_PUBLIC_SHORTURL | 短链接服务，记得带 / | https://suo.yt/ | 是 |
+| NEXT_PUBLIC_BACKENDS | 后端完整地址，多个用 \| 分隔 | http://127.0.0.1:25500/sub? | 是 |
+| BASE_URL | 订阅链接基础 URL（文本模式）<br/>如果设置，文本模式生成的订阅链接将使用此 URL<br/>如果留空，将自动使用当前访问的域名和端口 | https://your-domain.com:28011 | 否 |
 
 
 ## 常规部署

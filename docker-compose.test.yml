@@ -1,0 +1,21 @@
+services:
+  web:
+    image: whatgen/my-sub-web:latest
+    container_name: my-sub-web-test
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - NEXT_PUBLIC_SHORTURL=https://suo.yt/
+      - NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub?
+      # 启用 BASE_URL 进行测试
+      - BASE_URL=https://xuande.ltd:28011
+    ports:
+      - "8011:3000"
+    volumes:
+      - ./subscriptions:/app/subscriptions
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge

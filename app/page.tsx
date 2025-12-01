@@ -502,7 +502,16 @@ export default function Home() {
             aria-label="Mode"
             items={tabs}
             selectedKey={params.mode}
-            onSelectionChange={(key) => setParams({ ...params, mode: key.toString() as Params["mode"] })}
+            onSelectionChange={(key) => {
+              const newMode = key.toString() as Params["mode"];
+              // Clear subscription links when switching modes
+              setParams({ 
+                ...params, 
+                mode: newMode,
+                subLink: '',
+                shortSubLink: ''
+              });
+            }}
           >
             {(item) => (
               <Tab key={item.key} title={

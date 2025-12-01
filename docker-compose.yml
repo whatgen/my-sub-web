@@ -7,6 +7,10 @@ services:
       - TZ=Asia/Shanghai
       - NEXT_PUBLIC_SHORTURL=https://suo.yt/
       - NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub?
+      # 订阅链接文本模式的 URL（可选）
+      # 如果设置，文本模式生成的订阅链接将使用此 URL
+      # 如果不设置，将自动使用访问时的域名和端口
+      # - BASE_URL=https://your-domain.com:28011
     ports:
       - "8011:3000"
     volumes:

@@ -25,7 +25,9 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
-RUN printf "/** @type {import('next').NextConfig} */\nconst nextConfig = {};\nnextConfig.output = 'standalone';\nexport default nextConfig;\n" > next.config.mjs
+
+# 修改 next.config.mjs 以支持 standalone 输出和大文件上传
+RUN printf "/** @type {import('next').NextConfig} */\nconst nextConfig = {\n  output: 'standalone',\n  experimental: {\n    serverActions: {\n      bodySizeLimit: '10mb',\n    },\n  },\n  api: {\n    bodyParser: {\n      sizeLimit: '10mb',\n    },\n    responseLimit: false,\n  },\n};\n\nexport default nextConfig;\n" > next.config.mjs
 
 RUN cat next.config.mjs
 

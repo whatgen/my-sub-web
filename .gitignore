@@ -37,3 +37,6 @@ next-env.d.ts
 
 # subscriptions (user data)
 /subscriptions
+
+# docker tar files
+*.tar
